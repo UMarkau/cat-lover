@@ -1,6 +1,5 @@
-import { PropsWithChildren, useRef } from "react";
+import { PropsWithChildren } from "react";
 
-import { useClickOutside } from "../../../hooks";
 import { Overlay } from "../Overlay";
 
 import Styled from "./Modal.styled";
@@ -15,21 +14,23 @@ export const Modal = ({
   onClose,
   children,
 }: PropsWithChildren<IModalProps>) => {
-  const ref = useRef<HTMLElement>() as React.MutableRefObject<HTMLInputElement>;
-
-  const handleClose = () => {
-    onClose();
-  };
-
-  useClickOutside(ref, handleClose);
-
   if (!isVisible) {
     return null;
   }
 
   return (
-    <Overlay>
-      <Styled.Body ref={ref}>{children}</Styled.Body>
+    <Overlay
+      onClick={() => {
+        onClose();
+      }}
+    >
+      <Styled.Body
+        onClick={(event) => {
+          event.stopPropagation();
+        }}
+      >
+        {children}
+      </Styled.Body>
     </Overlay>
   );
 };

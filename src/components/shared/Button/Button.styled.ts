@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export interface IButtonProps {
-  isLoading: boolean;
+  isLoading?: boolean;
 }
 
 const Button = styled.button<IButtonProps>`

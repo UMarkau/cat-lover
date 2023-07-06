@@ -2,6 +2,10 @@ import { PropsWithChildren } from "react";
 
 import Styled from "./Overlay.styled";
 
-export const Overlay = ({ children }: PropsWithChildren) => (
-  <Styled.Wrapper>{children}</Styled.Wrapper>
+interface IProps {
+  onClick?: () => void;
+}
+
+export const Overlay = ({ children, onClick }: PropsWithChildren<IProps>) => (
+  <Styled.Wrapper onClick={onClick}>{children}</Styled.Wrapper>
 );
