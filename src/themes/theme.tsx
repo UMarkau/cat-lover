@@ -1,4 +1,4 @@
-import { DefaultTheme } from "styled-components";
+import { DefaultTheme, FlattenSimpleInterpolation } from "styled-components";
 
 export const theme: DefaultTheme = {
   lightGrayColor: "#F5F5F5",
@@ -8,7 +8,9 @@ export const theme: DefaultTheme = {
   whiteColor: "#fff",
   orangeColor: "#EEB111",
   breakpoints: {
-    tablet: (styles: string) => `@media (min-width: 600px) {${styles}}`,
-    desktop: (styles: string) => `@media (min-width: 1025px) {${styles}}`,
+    tablet: (styles: FlattenSimpleInterpolation) =>
+      `@media (min-width: 600px) {${styles}}`,
+    desktop: (styles: FlattenSimpleInterpolation) =>
+      `@media (min-width: 1025px) {${styles}}`,
   },
 };
