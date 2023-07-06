@@ -1,6 +1,8 @@
 import { PropsWithChildren, useRef } from "react";
 
 import { useClickOutside } from "../../../hooks";
+import { Overlay } from "../Overlay";
+
 import Styled from "./Modal.styled";
 
 export interface IModalProps {
@@ -26,8 +28,8 @@ export const Modal = ({
   }
 
   return (
-    <Styled.Overlay>
+    <Overlay>
       <Styled.Body ref={ref}>{children}</Styled.Body>
-    </Styled.Overlay>
+    </Overlay>
   );
 };

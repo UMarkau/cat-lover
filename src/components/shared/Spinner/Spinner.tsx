@@ -1,5 +1,13 @@
-import Styled from "./Spinner.styled";
+import { Overlay } from "../Overlay";
 
-export const Spinner = () => {
-  return <Styled.Wrapper />;
+import Styled, { ISpinnerProps } from "./Spinner.styled";
+
+export const Spinner = ({ isFullScreen }: ISpinnerProps) => {
+  return isFullScreen ? (
+    <Overlay>
+      <Styled.Wrapper isFullScreen />
+    </Overlay>
+  ) : (
+    <Styled.Wrapper />
+  );
 };

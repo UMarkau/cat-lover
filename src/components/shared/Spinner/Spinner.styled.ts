@@ -1,14 +1,20 @@
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+export interface ISpinnerProps {
+  isFullScreen?: boolean;
+}
+
+const Wrapper = styled.div<ISpinnerProps>`
   width: 48px;
   height: 48px;
-  border: ${({ theme }) => `5px solid ${theme.lightGrayColor}`};
+  border: ${({ theme, isFullScreen }) =>
+    `5px solid ${isFullScreen ? theme.orangeColor : theme.lightGrayColor}`};
   border-bottom-color: transparent;
   border-radius: 50%;
   display: inline-block;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
+  z-index: 3;
 
   @keyframes rotation {
     0% {

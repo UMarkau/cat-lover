@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 
 import { getCats, ICat } from "../../api";
-import { Card, Button } from "../shared";
+import { Card, Spinner } from "../shared";
 import { CatDetailsModal } from "./components";
 
 import Styled from "./MainPage.styled";
@@ -32,7 +32,7 @@ export const MainPage = () => {
   }, []);
 
   if (isLoading && cats.length === 0) {
-    return <p>Loading...</p>;
+    return <Spinner isFullScreen />;
   }
 
   if (isError) {
