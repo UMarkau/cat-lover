@@ -1,8 +1,14 @@
 import { useCallback, useState, useEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { Modal, IModalProps, Spinner } from "../../../shared";
-import { getCat, ICat } from "../../../../api";
+import {
+  getCat,
+  ICat,
+  addToFavourites,
+  getFavouriteById,
+  removeFromFavourites,
+} from "../../../../api";
 
 import Styled from "./CatDetailsModal.styled";
 
@@ -11,6 +17,9 @@ export const CatDetailsModal = ({ isVisible, onClose }: IModalProps) => {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
+  const [favouriteId, setFavouriteId] = useState<number | null>(null);
+  const [isFavouriteLoading, setIsFavouriteLoading] = useState(false);
+
   const { catId } = useParams<{ catId: string }>();
 
   const fetchCat = useCallback(async () => {
@@ -25,9 +34,49 @@ export const CatDetailsModal = ({ isVisible, onClose }: IModalProps) => {
     }
   }, [catId]);
 
+  const checkIsFavourite = useCallback(async (id: string) => {
+    setIsFavouriteLoading(true);
+    try {
+      const response = await getFavouriteById(id);
+      const favouriteItem = response.data[0];
+      if (Boolean(favouriteItem)) {
+        setFavouriteId(favouriteItem.id);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsFavouriteLoading(false);
+    }
+  }, []);
+
+  const handleAddToFavourites = useCallback(async () => {
+    setIsFavouriteLoading(true);
+    try {
+      const response = await addToFavourites(catId as string);
+      setFavouriteId(response.data.id);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsFavouriteLoading(false);
+    }
+  }, [catId]);
+
+  const handleRemoveFromFavourites = useCallback(async () => {
+    setIsFavouriteLoading(true);
+    try {
+      await removeFromFavourites(favouriteId as number);
+      setFavouriteId(null);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsFavouriteLoading(false);
+    }
+  }, [favouriteId]);
+
   const handleClose = useCallback(() => {
-    setCat(null);
     onClose();
+    setCat(null);
+    setFavouriteId(null);
   }, [onClose]);
 
   useEffect(() => {
@@ -52,6 +101,12 @@ export const CatDetailsModal = ({ isVisible, onClose }: IModalProps) => {
     }
   };
 
+  useEffect(() => {
+    if (catId) {
+      checkIsFavourite(catId);
+    }
+  }, [catId, checkIsFavourite]);
+
   if (isLoading) {
     return <Spinner isFullScreen />;
   }
@@ -68,6 +123,21 @@ export const CatDetailsModal = ({ isVisible, onClose }: IModalProps) => {
           <Styled.CopyLinkButton onClick={handleCopyUrlClick}>
             {isCopied ? "Copied!" : "Copy Link"}
           </Styled.CopyLinkButton>
+          {favouriteId ? (
+            <Styled.IconWrapper
+              isLoading={isFavouriteLoading}
+              onClick={handleRemoveFromFavourites}
+            >
+              <Styled.RemoveFromFavouritesIcon />
+            </Styled.IconWrapper>
+          ) : (
+            <Styled.IconWrapper
+              isLoading={isFavouriteLoading}
+              onClick={handleAddToFavourites}
+            >
+              <Styled.AddToFavouritesIcon />
+            </Styled.IconWrapper>
+          )}
         </Styled.ButtonsWrapper>
       </Styled.Wrapper>
     </Modal>

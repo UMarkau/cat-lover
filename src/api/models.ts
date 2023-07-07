@@ -42,3 +42,12 @@ interface IBreed {
   weight: { imperial: string; metric: string };
   wikipedia_url: string;
 }
+
+export interface IFavourite {
+  created_at: string;
+  id: number;
+  image: { id: string; url: string };
+  image_id: string;
+  sub_id: string | null;
+  user_id: string;
+}

@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 
 import { Button } from "../../../shared";
 
@@ -33,11 +34,46 @@ const ButtonsWrapper = styled.div`
 
 const CopyLinkButton = styled(Button)``;
 
+const commonIconStyle = css`
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  color: ${({ theme }) => theme.orangeColor};
+`;
+
+const AddToFavouritesIcon = styled(AiOutlineStar)`
+  ${commonIconStyle}
+`;
+
+const RemoveFromFavouritesIcon = styled(AiFillStar)`
+  ${commonIconStyle}
+`;
+
+const IconWrapper = styled.button<{ isLoading: boolean }>`
+  ${({ isLoading }) =>
+    isLoading &&
+    `
+    pointer-events: none;
+    animation: rotation 1s linear infinite;
+    @keyframes rotation {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  `};
+`;
+
 const StyledCatDetailsModal = {
   Wrapper,
   Image,
   ButtonsWrapper,
   CopyLinkButton,
+  AddToFavouritesIcon,
+  RemoveFromFavouritesIcon,
+  IconWrapper,
 };
 
 export default StyledCatDetailsModal;
