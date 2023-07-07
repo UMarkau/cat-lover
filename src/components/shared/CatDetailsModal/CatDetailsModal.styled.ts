@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 
-import { Button } from "../../../shared";
+import { Button } from "..";
 
 const Wrapper = styled.div`
   padding: 20px;
@@ -66,6 +66,15 @@ const IconWrapper = styled.button<{ isLoading: boolean }>`
   `};
 `;
 
+const BreedsWrapper = styled.div`
+  margin-top: 30px;
+`;
+
+const BreedsDescription = styled.p`
+  font-size: 22px;
+  color: ${({ theme }) => theme.orangeColor};
+`;
+
 const StyledCatDetailsModal = {
   Wrapper,
   Image,
@@ -74,6 +83,8 @@ const StyledCatDetailsModal = {
   AddToFavouritesIcon,
   RemoveFromFavouritesIcon,
   IconWrapper,
+  BreedsWrapper,
+  BreedsDescription,
 };
 
 export default StyledCatDetailsModal;

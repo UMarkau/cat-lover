@@ -2,8 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 
 import { getCats, ICat } from "../../api";
-import { Card, Spinner } from "../shared";
-import { CatDetailsModal } from "./components";
+import { Card, Spinner, CatDetailsModal } from "../shared";
 
 import Styled from "./MainPage.styled";
 

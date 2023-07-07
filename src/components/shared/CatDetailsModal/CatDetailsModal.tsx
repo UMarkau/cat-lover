@@ -1,14 +1,14 @@
-import { useCallback, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useCallback, useState, useEffect, useMemo } from "react";
+import { useParams, Link, NavLink } from "react-router-dom";
 
-import { Modal, IModalProps, Spinner } from "../../../shared";
+import { Modal, IModalProps, Spinner } from "..";
 import {
   getCat,
   ICat,
   addToFavourites,
   getFavouriteById,
   removeFromFavourites,
-} from "../../../../api";
+} from "../../../api";
 
 import Styled from "./CatDetailsModal.styled";
 
@@ -101,6 +101,10 @@ export const CatDetailsModal = ({ isVisible, onClose }: IModalProps) => {
     }
   };
 
+  const catBreed = useMemo(() => {
+    return cat?.breeds?.[0];
+  }, [cat]);
+
   useEffect(() => {
     if (catId) {
       checkIsFavourite(catId);
@@ -139,6 +143,14 @@ export const CatDetailsModal = ({ isVisible, onClose }: IModalProps) => {
             </Styled.IconWrapper>
           )}
         </Styled.ButtonsWrapper>
+        {Boolean(catBreed) && (
+          <Styled.BreedsWrapper>
+            <Styled.BreedsDescription>
+              Breed:{" "}
+              <NavLink to={`/breeds/${catBreed?.id}`}>{catBreed?.name}</NavLink>
+            </Styled.BreedsDescription>
+          </Styled.BreedsWrapper>
+        )}
       </Styled.Wrapper>
     </Modal>
   );
