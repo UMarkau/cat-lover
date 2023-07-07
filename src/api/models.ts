@@ -7,7 +7,7 @@ export interface ICat {
   categories?: { id: number; name: string }[];
 }
 
-interface IBreed {
+export interface IBreed {
   adaptability: number;
   affection_level: number;
   alt_names: string;

@@ -1,5 +1,5 @@
 import { useCallback, useState, useEffect, useMemo } from "react";
-import { useParams, Link, NavLink } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import { Modal, IModalProps, Spinner } from "..";
 import {
@@ -120,7 +120,7 @@ export const CatDetailsModal = ({ isVisible, onClose }: IModalProps) => {
   }
 
   return (
-    <Modal isVisible={isVisible} onClose={handleClose}>
+    <Modal isVisible={isVisible && Boolean(cat)} onClose={handleClose}>
       <Styled.Wrapper>
         <Styled.Image src={cat?.url} />
         <Styled.ButtonsWrapper>
@@ -147,7 +147,7 @@ export const CatDetailsModal = ({ isVisible, onClose }: IModalProps) => {
           <Styled.BreedsWrapper>
             <Styled.BreedsDescription>
               Breed:{" "}
-              <NavLink to={`/breeds/${catBreed?.id}`}>{catBreed?.name}</NavLink>
+              <Link to={`/breeds/${catBreed?.id}`}>{catBreed?.name}</Link>
             </Styled.BreedsDescription>
           </Styled.BreedsWrapper>
         )}

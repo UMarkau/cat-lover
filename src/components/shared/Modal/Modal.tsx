@@ -29,7 +29,12 @@ export const Modal = ({
           event.stopPropagation();
         }}
       >
-        {children}
+        <>
+          <Styled.IconWrapper onClick={onClose}>
+            <Styled.CloseIcon />
+          </Styled.IconWrapper>
+          {children}
+        </>
       </Styled.Body>
     </Overlay>
   );
