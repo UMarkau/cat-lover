@@ -6,3 +6,4 @@ export * from "./getFavouriteById";
 export * from "./removeFromFavourites";
 export * from "./getBreeds";
 export * from "./getCatsByBreedId";
+export * from "./getFavourites";

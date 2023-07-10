@@ -44,7 +44,7 @@ export const BreedDetailsModal = () => {
     <Modal isVisible={Boolean(cats.length)} onClose={handleClose}>
       <Styled.Wrapper>
         {cats.map((catInfo) => (
-          <Link key={catInfo.id} to={`/cat/${catInfo.id}`}>
+          <Link key={catInfo.id} to={`${catInfo.id}`}>
             <Styled.Image src={catInfo.url} />
           </Link>
         ))}

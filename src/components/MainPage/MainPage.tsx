@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import { getCats, ICat } from "../../api";
 import { Card, Spinner, CatDetailsModal } from "../shared";
@@ -10,7 +10,6 @@ export const MainPage = () => {
   const [cats, setCats] = useState<ICat[]>([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { catId } = useParams<{ catId: string }>();
   const navigate = useNavigate();
 
   const fetchCats = useCallback(async () => {
@@ -43,7 +42,7 @@ export const MainPage = () => {
   return (
     <Styled.Wrapper>
       {cats.map((cat) => (
-        <Link to={`/cat/${cat.id}`} key={cat.id}>
+        <Link to={`${cat.id}`} key={cat.id}>
           <Card>
             <Styled.CatImage src={cat.url} />
           </Card>
@@ -58,7 +57,6 @@ export const MainPage = () => {
         Show More
       </Styled.ShowMoreButton>
       <CatDetailsModal
-        isVisible={Boolean(catId)}
         onClose={() => {
           navigate("/");
         }}

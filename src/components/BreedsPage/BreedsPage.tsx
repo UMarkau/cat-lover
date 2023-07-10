@@ -1,8 +1,8 @@
 import { useEffect, useState, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { getBreeds, IBreed } from "../../api";
-import { Spinner } from "../shared";
+import { Spinner, CatDetailsModal } from "../shared";
 import { BreedDetailsModal } from "./components";
 
 import Styled from "./BreedsPage.styled";
@@ -10,6 +10,9 @@ import Styled from "./BreedsPage.styled";
 export const BreedsPage = () => {
   const [breeds, setBreeds] = useState<IBreed[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
+  const { breedId } = useParams<{ breedId: string; catId: string }>();
 
   const fetchBreeds = useCallback(async () => {
     setIsLoading(true);
@@ -22,6 +25,10 @@ export const BreedsPage = () => {
       setIsLoading(false);
     }
   }, []);
+
+  const handleCloseModal = useCallback(() => {
+    navigate(`/breeds/${breedId}`);
+  }, [breedId, navigate]);
 
   useEffect(() => {
     fetchBreeds();
@@ -40,6 +47,7 @@ export const BreedsPage = () => {
           </Styled.BreedItem>
         ))}
       <BreedDetailsModal />
+      <CatDetailsModal onClose={handleCloseModal} />
     </Styled.Wrapper>
   );
 };

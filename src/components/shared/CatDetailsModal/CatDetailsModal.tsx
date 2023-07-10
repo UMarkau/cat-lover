@@ -12,7 +12,9 @@ import {
 
 import Styled from "./CatDetailsModal.styled";
 
-export const CatDetailsModal = ({ isVisible, onClose }: IModalProps) => {
+export const CatDetailsModal = ({
+  onClose,
+}: Omit<IModalProps, "isVisible">) => {
   const [cat, setCat] = useState<ICat | null>(null);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -120,7 +122,7 @@ export const CatDetailsModal = ({ isVisible, onClose }: IModalProps) => {
   }
 
   return (
-    <Modal isVisible={isVisible && Boolean(cat)} onClose={handleClose}>
+    <Modal isVisible={Boolean(catId) && Boolean(cat)} onClose={handleClose}>
       <Styled.Wrapper>
         <Styled.Image src={cat?.url} />
         <Styled.ButtonsWrapper>
