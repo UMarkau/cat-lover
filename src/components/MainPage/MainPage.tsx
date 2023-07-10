@@ -10,6 +10,7 @@ export const MainPage = () => {
   const [cats, setCats] = useState<ICat[]>([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const fetchCats = useCallback(async () => {
