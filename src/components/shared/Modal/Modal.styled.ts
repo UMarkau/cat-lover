@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const Body = styled.div`
@@ -16,6 +16,12 @@ const Body = styled.div`
   }
   -ms-overflow-style: none;
   position: relative;
+
+  ${({ theme }) =>
+    theme.breakpoints.desktop(css`
+      width: 50%;
+      height: 80%;
+    `)}
 `;
 
 const CloseIcon = styled(AiOutlineCloseCircle)`

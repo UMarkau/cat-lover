@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;
@@ -6,6 +6,13 @@ const Wrapper = styled.div`
   gap: 20px;
   align-items: center;
   justify-content: center;
+
+  ${({ theme }) =>
+    theme.breakpoints.desktop(css`
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    `)}
 `;
 
 const BreedItem = styled.div`
@@ -27,6 +34,12 @@ const BreedItem = styled.div`
   &:hover {
     box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
   }
+
+  ${({ theme }) =>
+    theme.breakpoints.desktop(css`
+      width: auto;
+      padding: 0 20px;
+    `)}
 `;
 
 const StyledBreedsPage = {

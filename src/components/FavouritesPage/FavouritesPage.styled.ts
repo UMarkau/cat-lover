@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;
@@ -6,6 +6,13 @@ const Wrapper = styled.div`
   align-items: center;
   padding: 20px;
   gap: 10px;
+
+  ${({ theme }) =>
+    theme.breakpoints.desktop(css`
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    `)}
 `;
 
 const CatImage = styled.img`
